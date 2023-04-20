@@ -1,0 +1,163 @@
+﻿@model List<CatsTagram.Models.Post>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CatsTagram - Home</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<style>
+		body {
+			background-color: #f8f9fa;
+		}
+
+		.jumbotron {
+			background-color: #17a2b8;
+			color: #fff;
+			text-align: center;
+			padding: 4rem 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.post {
+			background-color: #fff;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			padding: 1rem;
+			margin-bottom: 2rem;
+		}
+
+			.post img {
+				max-width: 100%;
+				height: auto;
+				margin-bottom: 1rem;
+			}
+
+		.post-details {
+			padding: 0 1rem;
+		}
+
+			.post-details h3 {
+				margin-top: 0;
+				font-size: 1.5rem;
+				font-weight: 500;
+				color: #007bff;
+			}
+
+			.post-details p {
+				margin-bottom: 0.5rem;
+				font-size: 1.1rem;
+				color: #343a40;
+				line-height: 1.5;
+			}
+
+		.hashtags {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-wrap: wrap;
+			margin-top: 0.5rem;
+		}
+
+			.hashtags li {
+				margin-right: 0.5rem;
+				margin-bottom: 0.5rem;
+				background-color: #007bff;
+				color: #fff;
+				font-size: 0.9rem;
+				padding: 0.25rem 0.5rem;
+				border-radius: 2rem;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+				.hashtags li:last-child {
+					margin-right: 0;
+				}
+
+				.hashtags li:hover {
+					background-color: #0069d9;
+				}
+
+		.post-footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 1rem;
+		}
+
+			.post-footer i {
+				font-size: 1.2rem;
+				color: #ccc;
+				transition: all 0.3s ease;
+				cursor: pointer;
+			}
+
+				.post-footer i:hover {
+					color: #007bff;
+				}
+
+		.btn-cta {
+			background-color: #007bff;
+			color: #fff;
+			font-weight: 600;
+			border-radius: 2rem;
+			padding: 0.5rem 1rem;
+			font-size: 1.1rem;
+			transition: all 0.3s ease;
+		}
+
+			.btn-cta:hover {
+				background-color: #0069d9;
+			}
+	</style>
+</head>
+   <body>
+	<div class="jumbotron">
+		<h1>Welcome to CatsTagram!</h1>
+		<p class="lead">The purrfect place to share pictures of your favorite Cat pics .</p>
+	</div>
+	</body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Recent Posts</h2>
+				<hr />
+			</div>
+		</div>
+		<div class="row">
+			@foreach (var post in Model)
+			{
+				<div class="col-md-4">
+					<div class="post">
+						<img src="@Url.Content(post.ImageData)" alt="Cat image" />
+						<div class="post-details">
+							<h3>@post.AuthorName</h3>
+							<p>@post.Comment</p>
+							<ul class="hashtags">
+								@foreach (var hashtag in post.Hashtags)
+								{
+									var hashtagValue = hashtag.Text;
+									var hashtagsArray = hashtagValue.Split(',');
+
+									foreach (var tag in hashtagsArray)
+									{
+										<li>@tag</li>
+									}
+								}
+							</ul>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+
+	@section scripts{
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+	}
+	</html>
